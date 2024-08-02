@@ -1,0 +1,53 @@
+#/* SPDX-License-Identifier: Apache-2.0 */
+#/* Copyright (c) 2012-2024 Applied Communication Sciences
+# * (now Peraton Labs Inc.)
+# *
+# * This software was developed in work supported by the following U.S.
+# * Government contracts:
+# *
+# * HR0011-20-C-0160 HR0011-16-C-0061
+# * 
+# *
+# * Any opinions, findings and conclusions or recommendations expressed in
+# * this material are those of the author(s) and do not necessarily reflect
+# * the views, either expressed or implied, of the U.S. Government.
+# *
+# * DoD Distribution Statement A
+# * Approved for Public Release, Distribution Unlimited
+# *
+# * DISTAR 40011, cleared July 24, 2024
+# *
+# * Licensed under the Apache License, Version 2.0 (the "License");
+# * you may not use this file except in compliance with the License.
+# * You may obtain a copy of the License at
+# *
+# * http://www.apache.org/licenses/LICENSE-2.0
+# */
+#
+# icmp detector configuration
+icmp_sensor_fifo: /tmp/icmpSensorFifo
+icmp_detector_log_file: /DIST/log/icmp_detector.log
+icmp_detector_ssv_file: /DIST/log/icmp_detector.ssv
+ports_attacked_threshold: 100
+max_hold_time: 100000
+max_ranges_per_message: 65535
+use_whitelist: 1
+packets_per_interval_threshold: 100
+look_back_time: 1000001
+#
+# whitelist
+# Allow only UDP port 5060
+192.168.2.1: 5060,5061,17
+# Allow only UDP port 6000
+192.168.2.1: 6000,6001,17
+# Allow only TCP port 80
+192.168.2.1: 80,81,6
+#
+# Remediation (aka iptables controller)
+remediation_ip: 172.20.30.11
+remediation_port_blacklist: 4444
+remediation_port_whitelist: 4446
+# debug, info, warn, error, critical
+remediator_log_level: debug
+# Subnet associated with the interface to protect on `src_mec`
+access_network_subnet: 192.168.1.0/24
